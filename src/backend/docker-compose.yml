@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: simu-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: simu
+      POSTGRES_USER: simu_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - simu_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U simu_user -d simu"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  simu_pg_data:
