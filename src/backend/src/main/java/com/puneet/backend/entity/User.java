@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue
@@ -35,7 +35,7 @@ public class Users {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Users u)) return false;
+        if (!(o instanceof User u)) return false;
         return id != null && id.equals(u.id);
     }
 
