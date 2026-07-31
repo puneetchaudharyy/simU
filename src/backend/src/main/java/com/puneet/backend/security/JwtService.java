@@ -26,6 +26,14 @@ public class JwtService {
         this.refreshTokenExpirationMs = refreshTokenExpirationMs;
     }
 
+    public long getAccessTokenExpirationMs() {
+        return accessTokenExpirationMs;
+    }
+
+    public long getRefreshTokenExpirationMs() {
+        return refreshTokenExpirationMs;
+    }
+
     public String generateAccessToken(UUID userId, String email) {
         Date now = new Date();
         Date expiry = new Date(now.getTime() + accessTokenExpirationMs);
