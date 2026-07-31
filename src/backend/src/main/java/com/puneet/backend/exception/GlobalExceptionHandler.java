@@ -48,4 +48,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiError.of(
                 HttpStatus.UNAUTHORIZED.value(), "Unauthorized", ex.getMessage()));
     }
+
+    @ExceptionHandler(MonitorNotFoundException.class)
+    public ResponseEntity<ApiError> handleMonitorNotFound(MonitorNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ApiError.of(
+                HttpStatus.NOT_FOUND.value(), "Not Found", ex.getMessage()));
+    }
 }
