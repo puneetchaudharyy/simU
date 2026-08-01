@@ -1,0 +1,55 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: simu-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: simu
+      POSTGRES_USER: simu_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - simu_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U simu_user -d simu"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./src/backend
+    container_name: simu-backend
+    restart: unless-stopped
+    environment:
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      # Overrides the localhost default in application.properties so the
+      # backend reaches Postgres by its service name on the compose network.
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/simu
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./src/frontend
+    container_name: simu-frontend
+    restart: unless-stopped
+    environment:
+      # The browser calls this URL directly, so it must be reachable from
+      # your host machine (localhost), not the Docker service name.
+      VITE_API_BASE_URL: http://localhost:8080
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./src/frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  simu_pg_data:

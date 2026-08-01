@@ -1,0 +1,72 @@
+/*
+  Design tokens for simU.
+
+  Direction: a technical "ops console" feel, not a marketing site — this is a
+  tool developers watch while debugging an outage. Monospace carries data
+  (URLs, status codes, timestamps, response times) so numbers feel precise
+  and scannable; the sans face carries UI chrome (nav, buttons, labels).
+  Status colors are the one place we allow color to do real work, since
+  up/down/paused is the entire point of the product.
+*/
+
+:root {
+  /* Surfaces */
+  --color-bg: #0b0f14;
+  --color-surface: #12181f;
+  --color-surface-raised: #1a222b;
+  --color-border: #232c37;
+  --color-border-hover: #2f3a47;
+
+  /* Text */
+  --color-text: #e6edf3;
+  --color-text-muted: #8b99a8;
+  --color-text-faint: #5b6774;
+
+  /* Brand / interactive */
+  --color-accent: #6c8cff;
+  --color-accent-hover: #8aa3ff;
+  --color-accent-text: #0b0f14;
+
+  /* Status — the semantic core of the product */
+  --color-up: #2fd675;
+  --color-up-bg: rgba(47, 214, 117, 0.12);
+  --color-down: #ff5c5c;
+  --color-down-bg: rgba(255, 92, 92, 0.12);
+  --color-paused: #8b99a8;
+  --color-paused-bg: rgba(139, 153, 168, 0.12);
+
+  /* Feedback */
+  --color-danger: #ff5c5c;
+  --color-danger-hover: #ff7a7a;
+
+  /* Type */
+  --font-ui: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Shape */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+}
