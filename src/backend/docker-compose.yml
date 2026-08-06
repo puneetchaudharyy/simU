@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:16
-    container_name: simu-postgres
+    container_name: simu-postgres-backend
     restart: unless-stopped
     environment:
       POSTGRES_DB: simu

@@ -5,7 +5,8 @@ import org.hibernate.validator.constraints.URL;
 
 public record CreateMonitorRequest(
         @NotBlank @Size(max = 120) String name,
-        @NotBlank @URL(protocol = "http") @Size(max = 2048) String url,
+        @URL(regexp = "https?://.*", message = "must be a valid HTTP or HTTPS URL")
+        @Size(max = 2048) String url,
         @Pattern(regexp = "GET|POST|HEAD|PUT", message = "method must be one of GET, POST, HEAD, PUT")
         String method,
         @Min(100) @Max(599) Integer expectedStatusCode,

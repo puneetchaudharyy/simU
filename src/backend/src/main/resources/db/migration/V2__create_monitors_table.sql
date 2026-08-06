@@ -1,0 +1,15 @@
+CREATE TABLE monitors (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    name VARCHAR(120) NOT NULL,
+    url TEXT NOT NULL,
+    method VARCHAR(10) NOT NULL DEFAULT 'GET',
+    expected_status_code INTEGER NOT NULL DEFAULT 200,
+    check_interval_sec INTEGER NOT NULL DEFAULT 60,
+    timeout_ms INTEGER NOT NULL DEFAULT 5000,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_monitors_user_id ON monitors(user_id);
